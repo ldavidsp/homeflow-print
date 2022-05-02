@@ -7,10 +7,10 @@ package com.homeflow.printer.core
  */
 interface Printable {
 
-	/**
-	 * Get printables.
-	 *
-	 * @return List<String>
-	 */
-	fun getPrintables() : String
+  /**
+   * Get printables.
+   *
+   * @return List<String>
+   */
+  fun getPrintables(): String
 }
