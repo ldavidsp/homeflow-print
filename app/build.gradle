@@ -42,6 +42,12 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
+    implementation "com.github.permissions-dispatcher:permissionsdispatcher:4.9.2"
+    annotationProcessor "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.9.2"
+
+    /**
+     * Printer
+     */
     implementation project(':printer')
 
     testImplementation 'junit:junit:4.13.2'

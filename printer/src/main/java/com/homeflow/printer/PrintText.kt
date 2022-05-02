@@ -5,8 +5,8 @@ package com.homeflow.printer
  *
  * @constructor Create empty Printable
  */
-object PrintText {
-	private var print: String = ""
+object PrintText : Printable {
+	private var print = ""
 
 	/**
 	 * Set line plane.
@@ -57,8 +57,12 @@ object PrintText {
 	 *
 	 * @return String
 	 */
-	fun setNewLine(): String {
-		return "${this.print}\n"
+	/*fun setNewLine(): Printable {
+		return this.print.plus("\n").toString()
+	}*/
+
+	override fun getPrintables(): List<String> {
+		TODO("Not yet implemented")
 	}
 }
 

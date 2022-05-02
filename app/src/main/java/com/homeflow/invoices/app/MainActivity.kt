@@ -1,6 +1,7 @@
 package com.homeflow.invoices.app
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,7 +11,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.homeflow.invoices.app.databinding.ActivityMainBinding
-import com.homeflow.printer.PrintText
+import com.homeflow.printer.Printable
+import com.homeflow.printer.core.TextPrintable
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,10 +34,26 @@ class MainActivity : AppCompatActivity() {
 		binding.fab.setOnClickListener { view ->
 			Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 				.setAction("Action", null).show()
+
+			val print  = ArrayList<Printable>()
+
+			print.add(TextPrintable.Builder().setLeft("TERMINAL:").setRight("342222").setNewLine())
+			print.add(TextPrintable.Builder().setLeft("NUM. TARJETA:").setRight("535353").setNewLine())
+			print.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+			print.add(TextPrintable.Builder().setLeft("VENTA FACTURA Nro:").setRight("7373").setNewLine())
+			print.add(TextPrintable.Builder().setLeft("Fecha: 12/03/2000").setRight("Hora: $23:49").setNewLine())
+			print.add(TextPrintable.Builder().setLeft("Ref: 93939393").setRight("Autorizacion: $8383").setNewLine())
+			print.add(TextPrintable.Builder().setLeft("FORMA DE PAGO:").setRight("QPOS").setNewLine())
+			print.add(TextPrintable.Builder().setLeft("TOTAL:").setRight("7373").setNewLine())
+
+			print.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+			print.add(TextPrintable.Builder().setCenter("No  requiere firma").setNewLine())
+
+			print.map { it
+				Log.e("DATA: ", it.getPrintables().toString())
+			}
 		}
 
-		val data = ArrayList<PrintText>()
-	//	dad
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
