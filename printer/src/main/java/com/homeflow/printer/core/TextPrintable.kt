@@ -1,7 +1,5 @@
 package com.homeflow.printer.core
 
-import com.homeflow.printer.Printable
-
 /**
  * Printer Text.
  *
@@ -15,8 +13,8 @@ data class TextPrintable constructor(val text: String) : Printable {
    *
    * @return List<String>
    */
-  override fun getPrintables(): List<String> {
-    TODO("Not yet implemented")
+  override fun getPrintables(): String {
+    return text
   }
 
   /**
@@ -26,7 +24,6 @@ data class TextPrintable constructor(val text: String) : Printable {
    * @property textCenter String
    * @property textRight String
    * @property textLine String
-   * @property textNewLine String
    */
   class Builder {
     private var textLeft = ""
@@ -88,3 +85,4 @@ data class TextPrintable constructor(val text: String) : Printable {
     }
   }
 }
+

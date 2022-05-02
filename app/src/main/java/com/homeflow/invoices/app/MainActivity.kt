@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.homeflow.invoices.app.databinding.ActivityMainBinding
-import com.homeflow.printer.Printable
+import com.homeflow.printer.core.Printable
 import com.homeflow.printer.core.TextPrintable
 
 class MainActivity : AppCompatActivity() {
@@ -49,8 +49,9 @@ class MainActivity : AppCompatActivity() {
 			print.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
 			print.add(TextPrintable.Builder().setCenter("No  requiere firma").setNewLine())
 
-			print.map { it
-				Log.e("DATA: ", it.getPrintables().toString())
+			val printer = Printer()
+			print.map {
+				Log.e("DATA: ", it.getPrintables())
 			}
 		}
 
