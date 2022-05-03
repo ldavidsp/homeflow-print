@@ -1,5 +1,8 @@
 package com.homeflow.invoices.app
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -53,6 +56,35 @@ class MainActivity : AppCompatActivity() {
       Log.e("DATA: ", HomeflowPrint.previewLog(print))
     }
 
+    printer()
+  }
+
+  fun printer() {
+    if ((checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) ||
+      (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) ||
+      (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) ||
+      (checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED) ||
+      (checkSelfPermission(Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_DENIED)
+    ) {
+      val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        arrayOf(
+          Manifest.permission.WRITE_EXTERNAL_STORAGE,
+          Manifest.permission.CAMERA,
+          Manifest.permission.ACCESS_FINE_LOCATION,
+          Manifest.permission.BLUETOOTH_CONNECT,
+          Manifest.permission.BLUETOOTH_SCAN,
+        )
+      } else {
+        arrayOf(
+          Manifest.permission.WRITE_EXTERNAL_STORAGE,
+          Manifest.permission.CAMERA,
+          Manifest.permission.ACCESS_FINE_LOCATION,
+          Manifest.permission.BLUETOOTH,
+          Manifest.permission.BLUETOOTH_ADMIN,
+        )
+      }
+      requestPermissions(permissions, 1)
+    }
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
