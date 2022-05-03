@@ -1,5 +1,10 @@
 package com.homeflow.printer.core
 
+import android.app.Activity
+import android.util.DisplayMetrics
+import com.dantsu.escposprinter.EscPosPrinterSize
+import com.dantsu.escposprinter.textparser.PrinterTextParserImg
+
 /**
  * Printer Text.
  *
@@ -20,16 +25,34 @@ data class TextPrintable constructor(val text: String) : Printable {
   /**
    * Builder.
    *
+   * @property image String
    * @property textLeft String
    * @property textCenter String
    * @property textRight String
    * @property textLine String
+   * @property barCode String
+   * @property qrCode String
    */
   class Builder {
-    private var textLeft = ""
-    private var textCenter = ""
-    private var textRight = ""
-    private var textLine = ""
+    private var image: String = ""
+    private var textLeft: String = ""
+    private var textCenter: String = ""
+    private var textRight: String = ""
+    private var textLine: String = ""
+    private var barCode: String = ""
+    private var qrCode: String = ""
+
+    /**
+     * Set image.
+     *
+     * @param setImage Drawable
+     * @return Builder
+     */
+    /*fun setImage(setImage: Int, activity: Activity): Builder {
+      //val printer = EscPosPrinterSize()
+      //this.image = "[C]<img>${PrinterTextParserImg.bitmapToHexadecimalString(34f, activity.resources.getDrawableForDensity(setImage, DisplayMetrics.DENSITY_MEDIUM))}</img>"
+      return this
+    }*/
 
     /**
      * Set line plane.
