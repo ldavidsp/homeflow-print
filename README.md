@@ -4,9 +4,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/ldavidsp/homeflow-print.svg)
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=homeflow-print.readme)
 
-<p align="center"><img src="static/logo.png" height="230"></p>
-
-
 Homeflow Printer Android Kotlin
 =====
 
