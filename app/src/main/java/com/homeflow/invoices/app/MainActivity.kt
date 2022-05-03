@@ -5,21 +5,21 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import com.google.android.material.snackbar.Snackbar
 import com.homeflow.invoices.app.databinding.ActivityMainBinding
 import com.homeflow.printer.HomeflowPrint
 import com.homeflow.printer.core.Printable
 import com.homeflow.printer.core.TextPrintable
 
-class MainActivity : AppCompatActivity() {
 
+class MainActivity : AppCompatActivity() {
   private lateinit var appBarConfiguration: AppBarConfiguration
   private lateinit var binding: ActivityMainBinding
 
@@ -39,27 +39,32 @@ class MainActivity : AppCompatActivity() {
       Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
         .setAction("Action", null).show()
 
-      val print = ArrayList<Printable>()
+      val printable = ArrayList<Printable>()
 
-      print.add(TextPrintable.Builder().setLeft("TERMINAL:").setRight("342222").setNewLine())
-      print.add(TextPrintable.Builder().setLeft("NUM. TARJETA:").setRight("535353").setNewLine())
-      print.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
-      print.add(TextPrintable.Builder().setLeft("VENTA FACTURA Nro:").setRight("7373").setNewLine())
-      print.add(TextPrintable.Builder().setLeft("Fecha: 12/03/2000").setRight("Hora: $23:49").setNewLine())
-      print.add(TextPrintable.Builder().setLeft("Ref: 93939393").setRight("Autorizacion: $8383").setNewLine())
-      print.add(TextPrintable.Builder().setLeft("FORMA DE PAGO:").setRight("QPOS").setNewLine())
-      print.add(TextPrintable.Builder().setLeft("TOTAL:").setRight("7373").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("TERMINAL:").setRight("342222").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("NUM. TARJETA:").setRight("535353").setNewLine())
+      printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("VENTA FACTURA Nro:").setRight("7373").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Fecha: 12/03/2000").setRight("Hora: $23:49").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Ref: 93939393").setRight("Autorizacion: $8383").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("FORMA DE PAGO:").setRight("QPOS").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("TOTAL:").setRight("7373").setNewLine())
 
-      print.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
-      print.add(TextPrintable.Builder().setCenter("No  requiere firma").setNewLine())
+      printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("No  requiere firma").setNewLine())
 
-      Log.e("DATA: ", HomeflowPrint.previewLog(print))
+      HomeflowPrint.previewLog(printable)
+      HomeflowPrint.bluetooth(printable)
     }
 
     printer()
   }
 
-  fun printer() {
+  /**
+   * Printer Permission
+   *
+   */
+  private fun printer() {
     if ((checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) ||
       (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) ||
       (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) ||
@@ -68,19 +73,21 @@ class MainActivity : AppCompatActivity() {
     ) {
       val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         arrayOf(
-          Manifest.permission.WRITE_EXTERNAL_STORAGE,
           Manifest.permission.CAMERA,
-          Manifest.permission.ACCESS_FINE_LOCATION,
-          Manifest.permission.BLUETOOTH_CONNECT,
+          Manifest.permission.BLUETOOTH,
           Manifest.permission.BLUETOOTH_SCAN,
-        )
+          Manifest.permission.BLUETOOTH_ADMIN,
+          Manifest.permission.BLUETOOTH_CONNECT,
+          Manifest.permission.ACCESS_FINE_LOCATION,
+          Manifest.permission.WRITE_EXTERNAL_STORAGE,
+          )
       } else {
         arrayOf(
-          Manifest.permission.WRITE_EXTERNAL_STORAGE,
           Manifest.permission.CAMERA,
-          Manifest.permission.ACCESS_FINE_LOCATION,
           Manifest.permission.BLUETOOTH,
           Manifest.permission.BLUETOOTH_ADMIN,
+          Manifest.permission.ACCESS_FINE_LOCATION,
+          Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
       }
       requestPermissions(permissions, 1)

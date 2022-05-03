@@ -55,10 +55,8 @@ object HomeflowPrint {
    * @param printables MutableList<Printable>
    * @return String
    */
-  fun previewLog(printables: MutableList<Printable>): String {
-    var printable = "\n"
-    printables.map { printable += it.getPrintables() }
-    return printable
+  fun previewLog(printables: MutableList<Printable>) {
+    printables.map { Log.e("PRINTABLE: ", it.getPrintables()) }
   }
 
 }
