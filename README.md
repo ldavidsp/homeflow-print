@@ -12,21 +12,79 @@ Homeflow Printer, it is a library that uses https://github.com/DantSu/ESCPOS-The
   - Bluetooth
   - USB
   - TCP
+ 
+## Installation
 
-Installation
---------
+**Step 1.** Add the [JitPack](https://jitpack.io/#ldavidsp/homeflow-print/1.1.0) repository to your build file. Add it in your root `/build.gradle` at the end of repositories:
 
 ```gradle
-repositories {
-  maven { url 'https://jitpack.io' }
-}
-
-dependencies {
-  implementation 'com.github.ldavidsp:homeflow-print:1.1.0'
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
-Usage
+**If gradle is 7.2**:. Add the dependency in /settings.gradle:
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+**Step 2.** Add the dependency in `/settings.gradle` :
+
+```gradle
+dependencies {
+    ...
+    implementation 'com.github.ldavidsp:homeflow-print:v1.1.0'
+}
+```
+
+## Bluetooth
+
+### Bluetooth permission
+Make sure to add the following permissions to your ```AndroidMenifest.xml```.
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.BLUETOOTH" />
+<uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+```
+Also, you have to check the bluetooth permission in your app like this :
+```kotlin
+private fun printerPermission() {
+    if ((checkSelfPermission(Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_DENIED) ||
+      (checkSelfPermission(Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_DENIED) ||
+      (checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED) ||
+      (checkSelfPermission(Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_DENIED)
+    ) {
+      val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        arrayOf(
+          Manifest.permission.BLUETOOTH,
+          Manifest.permission.BLUETOOTH_SCAN,
+          Manifest.permission.BLUETOOTH_ADMIN,
+          Manifest.permission.BLUETOOTH_CONNECT,
+          )
+      } else {
+        arrayOf(
+          Manifest.permission.BLUETOOTH,
+          Manifest.permission.BLUETOOTH_ADMIN,
+        )
+      }
+      requestPermissions(permissions, 1)
+    }
+  }
+```
+
+
+Usage Homeflow Printer
 -------------------
 ```kotlin
 val printable = ArrayList<Printable>()
