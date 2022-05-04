@@ -4,14 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.homeflow.invoices.app.databinding.ActivityMainBinding
 import com.homeflow.printer.HomeflowPrint
@@ -20,38 +13,48 @@ import com.homeflow.printer.core.TextPrintable
 
 
 class MainActivity : AppCompatActivity() {
-  private lateinit var appBarConfiguration: AppBarConfiguration
   private lateinit var binding: ActivityMainBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
-
     setSupportActionBar(binding.toolbar)
-
-    val navController = findNavController(R.id.nav_host_fragment_content_main)
-    appBarConfiguration = AppBarConfiguration(navController.graph)
-    setupActionBarWithNavController(navController, appBarConfiguration)
 
     binding.fab.setOnClickListener { view ->
       Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
         .setAction("Action", null).show()
 
       val printable = ArrayList<Printable>()
+      printable.add(TextPrintable.Builder().setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("EL BUEN AMIGO").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("18383838383").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("San Jose - Acosta - Cangrejal ( Lo que sea )").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("jpedrez@gmail.com").setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
 
-      printable.add(TextPrintable.Builder().setLeft("TERMINAL:").setRight("342222").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("NUM. TARJETA:").setRight("535353").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Condición: Contado").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Clave: Contado").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Tiquete Electrónico: 00001040000000118").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Cliente: Contado").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("13/04/2022 15:20:38").setNewLine())
       printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("VENTA FACTURA Nro:").setRight("7373").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Fecha: 12/03/2000").setRight("Hora: $23:49").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Ref: 93939393").setRight("Autorizacion: $8383").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("FORMA DE PAGO:").setRight("QPOS").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("TOTAL:").setRight("7373").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Cant.").setCenter("Producto").setRight("Total").setNewLine())
+      printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+
+      printable.add(TextPrintable.Builder().setLeft("1").setCenter("Laptop").setRight("C$ 1,200.00").setNewLine())
 
       printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
-      printable.add(TextPrintable.Builder().setCenter("No  requiere firma").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Subtotal Gravado").setRight("C$ 1,061.95").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Subtotal No Gravado").setRight("C$ 0.00").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Total Gravado").setRight("C$ 1,061.95").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Total No Gravado").setRight("C$ 0.00").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("IVA (%13)").setRight("C$ 138.00").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Total").setRight("C$ 1200.00").setNewLine())
+      printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Pago Efectivo Colones").setRight("C$ 1200.00").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("Autorizada mediante la resolución de Facturación Electrónica N° DGT-R-033-2019 del 20 de junio del 2019 de la Dirección General de Tributación. Versión del documento 4.3").setNewLine())
+
 
       HomeflowPrint.previewLog(printable)
       HomeflowPrint.bluetooth(printable)
@@ -59,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
     printerPermission()
   }
-
   /**
    * Printer Permission
    *
@@ -96,25 +98,4 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    menuInflater.inflate(R.menu.menu_main, menu)
-    return true
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    return when (item.itemId) {
-      R.id.action_settings -> true
-      else -> super.onOptionsItemSelected(item)
-    }
-  }
-
-  override fun onSupportNavigateUp(): Boolean {
-    val navController = findNavController(R.id.nav_host_fragment_content_main)
-    return navController.navigateUp(appBarConfiguration)
-      || super.onSupportNavigateUp()
-  }
 }

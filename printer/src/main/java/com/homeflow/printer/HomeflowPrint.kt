@@ -3,6 +3,7 @@ package com.homeflow.printer
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import android.util.Log
+import com.dantsu.escposprinter.EscPosCharsetEncoding
 import com.dantsu.escposprinter.EscPosPrinter
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections
 import com.dantsu.escposprinter.connection.usb.UsbConnection
@@ -21,7 +22,7 @@ object HomeflowPrint {
    * @param printables MutableList<Printable>
    */
   fun bluetooth(printables: MutableList<Printable>) {
-    val printer = EscPosPrinter(BluetoothPrintersConnections.selectFirstPaired(), 203, 48f, 32)
+    val printer = EscPosPrinter(BluetoothPrintersConnections.selectFirstPaired(), 203, 48f, 32, EscPosCharsetEncoding("windows-1252", 16))
     printer.printFormattedText(rows(printables))
     printer.disconnectPrinter()
   }
