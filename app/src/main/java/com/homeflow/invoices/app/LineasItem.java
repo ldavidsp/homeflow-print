@@ -2,26 +2,26 @@ package com.homeflow.invoices.app;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LineasItem{
+public class LineasItem {
 
-	@SerializedName("Total")
-	private String total;
+  @SerializedName("total")
+  private String total;
 
-	@SerializedName("cantidad")
-	private int cantidad;
+  @SerializedName("cantidad")
+  private int cantidad;
 
-	@SerializedName("producto")
-	private String producto;
+  @SerializedName("producto")
+  private String producto;
 
-	public String getTotal(){
-		return total;
-	}
+  public String getTotal() {
+    return total;
+  }
 
-	public int getCantidad(){
-		return cantidad;
-	}
+  public int getCantidad() {
+    return cantidad;
+  }
 
-	public String getProducto(){
-		return producto;
-	}
+  public String getProducto() {
+    return producto;
+  }
 }
