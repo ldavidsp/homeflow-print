@@ -45,6 +45,8 @@ dependencies {
     implementation "com.github.permissions-dispatcher:permissionsdispatcher:4.9.2"
     annotationProcessor "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.9.2"
 
+    implementation 'com.google.code.gson:gson:2.8.9'
+
     /**
      * Printer
      */
