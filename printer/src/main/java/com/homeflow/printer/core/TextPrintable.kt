@@ -1,10 +1,5 @@
 package com.homeflow.printer.core
 
-import android.app.Activity
-import android.util.DisplayMetrics
-import com.dantsu.escposprinter.EscPosPrinterSize
-import com.dantsu.escposprinter.textparser.PrinterTextParserImg
-
 /**
  * Printer Text.
  *
