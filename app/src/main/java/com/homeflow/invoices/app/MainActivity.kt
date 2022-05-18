@@ -7,8 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.homeflow.invoices.app.databinding.ActivityMainBinding
-import com.homeflow.printer.HomeflowPrint
-import com.homeflow.printer.HomeflowUsb
+import com.homeflow.printer.HomeflowPrinter
 import com.homeflow.printer.core.Printable
 import com.homeflow.printer.core.TextPrintable
 
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
       printable.add(TextPrintable.Builder().setCenter("Autorizada mediante la resolución de Facturación Electrónica N° DGT-R-033-2019 del 20 de junio del 2019 de la Dirección General de Tributación. Versión del documento 4.3").setNewLine())
 
 
-      HomeflowUsb(this@MainActivity, printable).printUsb()
+      HomeflowPrinter(this@MainActivity, printable).printUsb()
     }
 
     printerPermission()
