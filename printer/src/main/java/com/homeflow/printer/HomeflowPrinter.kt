@@ -1,6 +1,5 @@
 package com.homeflow.printer
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -9,6 +8,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
+import android.os.Build
 import android.os.Parcelable
 import android.util.Log
 import com.dantsu.escposprinter.EscPosCharsetEncoding
@@ -41,7 +41,6 @@ class HomeflowPrinter(private var mActivity: Activity, private var printables: M
   /**
    * Print USB
    */
-  @SuppressLint("UnspecifiedImmutableFlag")
   fun printUsb() {
     val usbConnection = UsbPrintersConnections.selectFirstConnected(mActivity)
     val usbManager = mActivity.getSystemService(Context.USB_SERVICE) as UsbManager?
@@ -50,7 +49,7 @@ class HomeflowPrinter(private var mActivity: Activity, private var printables: M
         mActivity,
         0,
         Intent("com.android.example.USB_PERMISSION"),
-        0
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else 0
       )
       val filter = IntentFilter("com.android.example.USB_PERMISSION")
       mActivity.registerReceiver(this.usbReceiver, filter)
