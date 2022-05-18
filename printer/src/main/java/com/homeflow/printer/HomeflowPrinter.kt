@@ -14,6 +14,7 @@ import android.util.Log
 import com.dantsu.escposprinter.EscPosCharsetEncoding
 import com.dantsu.escposprinter.EscPosPrinter
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections
+import com.dantsu.escposprinter.connection.tcp.TcpConnection
 import com.dantsu.escposprinter.connection.usb.UsbConnection
 import com.dantsu.escposprinter.connection.usb.UsbPrintersConnections
 import com.homeflow.printer.core.Printable
@@ -59,12 +60,23 @@ class HomeflowPrinter(private var mActivity: Activity, private var printables: M
   }
 
   /**
-   * Print Preview Log
-   *
-   * @param printables MutableList<Printable>
-   * @return String
+   * Print TCP
    */
-  fun printPreviewLog(printables: MutableList<Printable>) {
+  fun printTCP(ip: String, port: Int) {
+    Thread {
+      try {
+        val printer = EscPosPrinter(TcpConnection(ip, port, 15), 203, 48f, 32)
+        printer.printFormattedText(rows(printables))
+      } catch (e: Exception) {
+        e.printStackTrace()
+      }
+    }.start()
+  }
+
+  /**
+   * Print Preview Log
+   */
+  fun printPreviewLog() {
     printables.map { Log.e("PREVIEW: ", it.getPrintables()) }
   }
 
