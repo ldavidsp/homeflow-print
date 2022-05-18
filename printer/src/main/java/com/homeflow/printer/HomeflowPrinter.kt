@@ -44,7 +44,6 @@ class HomeflowPrinter(private var mActivity: Activity, private var printables: M
   @SuppressLint("UnspecifiedImmutableFlag")
   fun printUsb() {
     val usbConnection = UsbPrintersConnections.selectFirstConnected(mActivity)
-    Log.e("USB", "USB CONNECTION: $usbConnection")
     val usbManager = mActivity.getSystemService(Context.USB_SERVICE) as UsbManager?
     if (usbConnection != null && usbManager != null) {
       val permissionIntent: PendingIntent = PendingIntent.getBroadcast(
