@@ -37,7 +37,7 @@ dependencyResolutionManagement {
 }
 ```
 
-**Step 2.** Add the dependency in `/settings.gradle` :
+**Step 2.** Add the dependency in `/app/build.gradle` :
 
 ```gradle
 dependencies {
