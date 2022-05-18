@@ -57,8 +57,7 @@ class MainActivity : AppCompatActivity() {
       printable.add(TextPrintable.Builder().setCenter("Autorizada mediante la resolución de Facturación Electrónica N° DGT-R-033-2019 del 20 de junio del 2019 de la Dirección General de Tributación. Versión del documento 4.3").setNewLine())
 
 
-      val usb = HomeflowUsb(this@MainActivity, printable)
-      usb.printUsb()
+      HomeflowUsb(this@MainActivity, printable).printUsb()
     }
 
     printerPermission()

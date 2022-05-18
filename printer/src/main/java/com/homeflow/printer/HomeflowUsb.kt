@@ -35,13 +35,21 @@ class HomeflowUsb(private var mActivity: Activity, private var printables: Mutab
           val usbManager = mActivity.getSystemService(Context.USB_SERVICE) as UsbManager
           val usbDevice = intent.getParcelableExtra<Parcelable>(UsbManager.EXTRA_DEVICE) as UsbDevice?
           if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-            if (usbDevice != null) {
+            if (usbManager!= null  && usbDevice != null) {
               HomeflowPrint.usb(printables, usbManager, usbDevice)
+              unregisterReceiver()
             }
           }
         }
       }
     }
+  }
+
+  /**
+   * Unregister receiver
+   */
+  private fun unregisterReceiver() {
+    mActivity.unregisterReceiver(usbReceiver)
   }
 
   /**
