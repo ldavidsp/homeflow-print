@@ -36,7 +36,6 @@ class HomeflowPrinter(private var mActivity: Activity, private var printables: M
     val printer = EscPosPrinter(BluetoothPrintersConnections.selectFirstPaired(), 203, 48f, 32, EscPosCharsetEncoding("windows-1252", 16))
     printer.printFormattedText(rows(printables))
     printer.disconnectPrinter()
-    unregisterReceiver()
   }
 
   /**

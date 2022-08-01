@@ -27,15 +27,15 @@ class MainActivity : AppCompatActivity() {
 
       val printable = ArrayList<Printable>()
       printable.add(TextPrintable.Builder().setNewLine())
-      printable.add(TextPrintable.Builder().setCenter("EL BUEN AMIGO").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("EL TEST").setNewLine())
       printable.add(TextPrintable.Builder().setCenter("18383838383").setNewLine())
-      printable.add(TextPrintable.Builder().setCenter("San Jose - Acosta - Cangrejal ( Lo que sea )").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("San Jose").setNewLine())
       printable.add(TextPrintable.Builder().setCenter("jpedrez@gmail.com").setNewLine())
       printable.add(TextPrintable.Builder().setNewLine())
 
       printable.add(TextPrintable.Builder().setLeft("Condición: Contado").setNewLine())
       printable.add(TextPrintable.Builder().setLeft("Clave: Contado").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Tiquete Electrónico: 00001040000000118").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Tiquete: 000010400").setNewLine())
       printable.add(TextPrintable.Builder().setLeft("Cliente: Contado").setNewLine())
       printable.add(TextPrintable.Builder().setLeft("13/04/2022 15:20:38").setNewLine())
       printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
@@ -52,11 +52,10 @@ class MainActivity : AppCompatActivity() {
       printable.add(TextPrintable.Builder().setLeft("IVA (%13)").setRight("C$ 138.00").setNewLine())
       printable.add(TextPrintable.Builder().setLeft("Total").setRight("C$ 1200.00").setNewLine())
       printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Pago Efectivo Colones").setRight("C$ 1200.00").setNewLine())
-      printable.add(TextPrintable.Builder().setCenter("Autorizada mediante la resolución de Facturación Electrónica N° DGT-R-033-2019 del 20 de junio del 2019 de la Dirección General de Tributación. Versión del documento 4.3").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Pago Efectivo").setRight("C$ 1200.00").setNewLine())
 
 
-      HomeflowPrinter(this@MainActivity, printable).printUsb()
+      //HomeflowPrinter(this@MainActivity, printable).printUsb()
     }
 
     printerPermission()

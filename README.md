@@ -88,50 +88,38 @@ Usage Homeflow Printer
 -------------------
 ```kotlin
 val printable = ArrayList<Printable>()
-printable.add(TextPrintable.Builder().setCenter("ORDER N°045").setNewLine())
-printable.add(TextPrintable.Builder().setLeft("BEAUTIFUL SHIRT").setRight("9.99e").setNewLine())
+printable.add(TextPrintable.Builder().setNewLine())
+printable.add(TextPrintable.Builder().setCenter("EL TEST").setNewLine())
+printable.add(TextPrintable.Builder().setCenter("18383838383").setNewLine())
+printable.add(TextPrintable.Builder().setCenter("San Marcos").setNewLine())
+printable.add(TextPrintable.Builder().setCenter("jpehgsre@gmail.com").setNewLine())
+printable.add(TextPrintable.Builder().setNewLine())
 
-HomeflowPrint.bluetooth(printable)
+printable.add(TextPrintable.Builder().setLeft("Condición: Contado").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Clave: Contado").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Tiquete: 000010400").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Cliente: Contado").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("13/04/2022 15:20:38").setNewLine())
+printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Cant.").setCenter("Producto").setRight("Total").setNewLine())
+printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
 
-or 
+printable.add(TextPrintable.Builder().setLeft("1").setCenter("Laptop").setRight("C$ 1,200.00").setNewLine())
 
-HomeflowPrint.usb(printable)
+printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Subtotal Gravado").setRight("C$ 1,061.95").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Subtotal No Gravado").setRight("C$ 0.00").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Total Gravado").setRight("C$ 1,061.95").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Total No Gravado").setRight("C$ 0.00").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("IVA (%13)").setRight("C$ 138.00").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Total").setRight("C$ 1200.00").setNewLine())
+printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+printable.add(TextPrintable.Builder().setLeft("Pago Efectivo").setRight("C$ 1200.00").setNewLine())
+
+HomeflowPrinter(mActivity, printable).printBluetooth()
+
+or
+
+HomeflowPrinter(mActivity, printable).printUsb()
 
 ```
-
-
-ESC/POS Thermal Printer - format
--------------------
-```java
-EscPosPrinter printer = new EscPosPrinter(BluetoothPrintersConnections.selectFirstPaired(), 203, 48f, 32);
-printer
-    .printFormattedText(
-        "[C]<img>" + PrinterTextParserImg.bitmapToHexadecimalString(printer, this.getApplicationContext().getResources().getDrawableForDensity(R.drawable.logo, DisplayMetrics.DENSITY_MEDIUM))+"</img>\n" +
-        "[L]\n" +
-        "[C]<u><font size='big'>ORDER N°045</font></u>\n" +
-        "[L]\n" +
-        "[C]================================\n" +
-        "[L]\n" +
-        "[L]<b>BEAUTIFUL SHIRT</b>[R]9.99e\n" +
-        "[L]  + Size : S\n" +
-        "[L]\n" +
-        "[L]<b>AWESOME HAT</b>[R]24.99e\n" +
-        "[L]  + Size : 57/58\n" +
-        "[L]\n" +
-        "[C]--------------------------------\n" +
-        "[R]TOTAL PRICE :[R]34.98e\n" +
-        "[R]TAX :[R]4.23e\n" +
-        "[L]\n" +
-        "[C]================================\n" +
-        "[L]\n" +
-        "[L]<font size='tall'>Customer :</font>\n" +
-        "[L]Raymond DUPONT\n" +
-        "[L]5 rue des girafes\n" +
-        "[L]31547 PERPETES\n" +
-        "[L]Tel : +33801201456\n" +
-        "[L]\n" +
-        "[C]<barcode type='ean13' height='10'>831254784551</barcode>\n" +
-        "[C]<qrcode size='20'>http://www.developpeur-web.dantsu.com/</qrcode>"
-    );
-```
-
