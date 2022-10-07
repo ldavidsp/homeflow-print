@@ -7,7 +7,7 @@
 Homeflow Printer Android Kotlin
 =====
 
-Homeflow Printer, it is a library that uses https://github.com/DantSu/ESCPOS-ThermalPrinter-Android/tree/3.2.0 in a custom print format.
+Homeflow Printer, it is a library that uses https://github.com/DantSu/ESCPOS-ThermalPrinter-Android/tree/3.2.1 in a custom print format.
 
   - Bluetooth
   - USB
