@@ -42,7 +42,7 @@ dependencyResolutionManagement {
 ```gradle
 dependencies {
     ...
-    implementation 'com.github.ldavidsp:homeflow-print:v2.0.0'
+    implementation 'com.github.ldavidsp:homeflow-print:v2.0.1'
 }
 ```
 
