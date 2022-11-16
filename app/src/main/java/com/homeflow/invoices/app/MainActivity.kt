@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.homeflow.invoices.app.databinding.ActivityMainBinding
@@ -27,38 +28,61 @@ class MainActivity : AppCompatActivity() {
 
       val printable = ArrayList<Printable>()
       printable.add(TextPrintable.Builder().setNewLine())
-      printable.add(TextPrintable.Builder().setCenter("EL TEST").setNewLine())
-      printable.add(TextPrintable.Builder().setCenter("18383838383").setNewLine())
-      printable.add(TextPrintable.Builder().setCenter("San Jose").setNewLine())
-      printable.add(TextPrintable.Builder().setCenter("jpedrez@gmail.com").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter(getString(R.string.app_name)).setNewLine())
       printable.add(TextPrintable.Builder().setNewLine())
 
-      printable.add(TextPrintable.Builder().setLeft("Condición: Contado").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Clave: Contado").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Tiquete: 000010400").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Cliente: Contado").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("13/04/2022 15:20:38").setNewLine())
-      printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Cant.").setCenter("Producto").setRight("Total").setNewLine())
-      printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
+      // Part 2
+      printable.add(TextPrintable.Builder().setCenter("LEON / 2341-2017").setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("Recibo: 1").setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
 
-      printable.add(TextPrintable.Builder().setLeft("1").setCenter("Laptop").setRight("C$ 1,200.00").setNewLine())
+      // Part 3
+      printable.add(TextPrintable.Builder().setLeft("Fecha/Hora:").setRight("14/11/2022").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Transaccion:").setRight("8463562726").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Transaccion:").setCenter("ID").setRight("8463562726").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Cobro del Dia:").setCenter("2783483").setRight("84635").setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
 
-      printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Subtotal Gravado").setRight("C$ 1,061.95").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Subtotal No Gravado").setRight("C$ 0.00").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Total Gravado").setRight("C$ 1,061.95").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Total No Gravado").setRight("C$ 0.00").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("IVA (%13)").setRight("C$ 138.00").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Total").setRight("C$ 1200.00").setNewLine())
-      printable.add(TextPrintable.Builder().setLine("----------------------------------------").setNewLine())
-      printable.add(TextPrintable.Builder().setLeft("Pago Efectivo").setRight("C$ 1200.00").setNewLine())
+      // Part 4
+      printable.add(TextPrintable.Builder().setLeft("Cliente: ").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Luis David Solorzano Paredes").setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
+
+      // Part 5
+      printable.add(TextPrintable.Builder().setLeft("Cobro del Dia").setRight("C$ 1,200").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Monto atrasado:").setRight("C$ 200").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Dias mora:").setRight("1").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Monto int. moratorio:").setRight("C$ 13,200").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("--------------------------------").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Total a pagar:").setRight("C$ 16,200").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("--------------------------------").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Monto de cancelacion:").setRight("C$ 18,200").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("--------------------------------").setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
+
+      // Part 6
+      printable.add(TextPrintable.Builder().setLeft("Total cobrado:").setRight("C$ 1,000").setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
+
+      // Part 7
+      printable.add(TextPrintable.Builder().setLeft("Concepto:").setRight("ABONO").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Saldo anterior:").setRight("C$ 18,200").setNewLine())
+      printable.add(TextPrintable.Builder().setLeft("Nuevo saldo:").setRight("C$ 16,200").setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
+      printable.add(TextPrintable.Builder().setNewLine())
+
+      // Part 8
+      printable.add(TextPrintable.Builder().setCenter("-------------------------").setNewLine())
+      printable.add(TextPrintable.Builder().setCenter("Jose David Solorzano").setNewLine())
 
 
-      //HomeflowPrinter(this@MainActivity, printable).printUsb()
+      HomeflowPrinter(this@MainActivity, printable).printPreviewLog()
     }
 
     printerPermission()
+
+    //Log.e("TAG", "onCreate: ${String(byteArrayOf(0), Charsets.UTF_8)}")
   }
   /**
    * Printer Permission

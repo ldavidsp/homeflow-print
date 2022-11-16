@@ -17,7 +17,11 @@ import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnection
 import com.dantsu.escposprinter.connection.tcp.TcpConnection
 import com.dantsu.escposprinter.connection.usb.UsbConnection
 import com.dantsu.escposprinter.connection.usb.UsbPrintersConnections
+import com.dantsu.escposprinter.textparser.PrinterTextParser
 import com.homeflow.printer.core.Printable
+import java.text.FieldPosition
+import java.util.*
+import java.util.regex.Pattern
 
 /**
  * Homeflow USB
@@ -75,7 +79,49 @@ class HomeflowPrinter(private var mActivity: Activity, private var printables: M
    * Print Preview Log
    */
   fun printPreviewLog() {
-    printables.map { Log.e("PREVIEW: ", it.getPrintables()) }
+    printables.map {
+      val pattern = Pattern.compile(PrinterTextParser.getRegexAlignTags())
+      val matcher = pattern.matcher(it.getPrintables()).pattern()
+      val split = it.getPrintables().trim().split(matcher).toMutableList()
+
+      if (split.size > 1) {
+        split.removeAt(0)
+        Log.e("PREVIEW: ", addLeftRightSpace(split))
+      } else {
+        Log.e("PREVIEW: ", "\n")
+      }
+    }
+  }
+
+  /**
+   * Print Preview Log
+   */
+  fun printGenerateImage() {
+    printables.map {
+      val pattern = Pattern.compile(PrinterTextParser.getRegexAlignTags())
+      val matcher = pattern.matcher(it.getPrintables()).pattern()
+      val split = it.getPrintables().trim().split(matcher).toMutableList()
+
+      if (split.size > 1) {
+        split.removeAt(0)
+        Log.e("PREVIEW: ", addLeftRightSpace(split))
+      } else {
+        Log.e("PREVIEW: ", "\n")
+      }
+    }
+  }
+
+  /**
+   * Add spaces to left and right.
+   *
+   * @param string MutableList<String>
+   * @return String
+   */
+  private fun addLeftRightSpace(string: MutableList<String>): String {
+    return when (string.size) {
+      2 -> string[0].plus(" ".repeat(32 - (string[0].length + string[1].length))).plus(string[1])
+      else -> string[0]
+    }
   }
 
   /**

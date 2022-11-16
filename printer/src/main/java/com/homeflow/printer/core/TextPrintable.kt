@@ -1,5 +1,7 @@
 package com.homeflow.printer.core
 
+import com.dantsu.escposprinter.EscPosPrinterCommands.TEXT_ALIGN_LEFT
+
 /**
  * Printer Text.
  *
