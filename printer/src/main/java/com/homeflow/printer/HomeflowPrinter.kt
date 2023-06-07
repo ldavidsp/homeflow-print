@@ -19,8 +19,6 @@ import com.dantsu.escposprinter.connection.usb.UsbConnection
 import com.dantsu.escposprinter.connection.usb.UsbPrintersConnections
 import com.dantsu.escposprinter.textparser.PrinterTextParser
 import com.homeflow.printer.core.Printable
-import java.text.FieldPosition
-import java.util.*
 import java.util.regex.Pattern
 
 /**
