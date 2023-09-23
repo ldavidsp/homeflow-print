@@ -4,15 +4,15 @@ plugins {
   id 'maven-publish'
 }
 
-def libraryVersionCode = 206
-def libraryVersionName = "2.0.6"
+def libraryVersionCode = 208
+def libraryVersionName = "2.0.8"
 
 android {
-  compileSdk 33
+  compileSdk 34
 
   defaultConfig {
     minSdk 23
-    targetSdk 33
+    targetSdk 34
     versionCode libraryVersionCode
     versionName libraryVersionName
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-  implementation('com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0')
+  implementation('com.github.ldavidsp:ESCPOS-ThermalPrinter-Android:3.3.2')
 }
 
 afterEvaluate {
