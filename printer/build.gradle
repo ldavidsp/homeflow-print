@@ -4,8 +4,8 @@ plugins {
   id 'maven-publish'
 }
 
-def libraryVersionCode = 208
-def libraryVersionName = "2.0.8"
+def libraryVersionCode = 209
+def libraryVersionName = "2.0.9"
 
 android {
   compileSdk 34
@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-  implementation('com.github.ldavidsp:ESCPOS-ThermalPrinter-Android:3.3.2')
+  implementation('com.github.ldavidsp:ESCPOS-ThermalPrinter-Android:3.3.3')
 }
 
 afterEvaluate {
