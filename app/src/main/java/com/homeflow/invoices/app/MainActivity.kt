@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
       printable.add(TextPrintable.Builder().setCenter("Jose David Solorzano").setNewLine())
 
 
-      HomeflowPrinter(this@MainActivity, printable).printBluetooth()
+      HomeflowPrinter(this@MainActivity, printable).printAsyncBlueTooth()
     }
 
     printerPermission()

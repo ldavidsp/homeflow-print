@@ -41,6 +41,24 @@ class HomeflowPrinter(private var mActivity: Activity, private var printables: M
   }
 
   /**
+   * Print async bluetooth.
+   */
+  fun printAsyncBlueTooth() {
+     Thread {
+        try {
+          val printer = EscPosPrinter(BluetoothPrintersConnections.selectFirstPaired(), 203, 48f, 32)
+          printer.printFormattedText(rows(printables))
+        } catch (e: Exception) {
+          e.printStackTrace()
+        }
+      }.start()
+  }
+
+  fun printAsyncBlueTooth2() {
+    //val printer = AsyncEscPosPrinter(printerConnection, 203, 48f, 32)
+  }
+
+  /**
    * Print USB
    */
   fun printUsb() {
